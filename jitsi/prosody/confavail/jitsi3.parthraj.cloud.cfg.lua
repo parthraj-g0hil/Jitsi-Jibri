@@ -1,3 +1,18 @@
+-- Enables dial-in for Jitsi meet components customers
+VirtualHost "jigasi.meet.jitsi"
+    modules_enabled = {
+        "ping";
+        "bosh";
+        "muc_password_check";
+    }
+    authentication = "token"
+    app_id = "jitsi";
+    asap_key_server = "https://jaas-public-keys.jitsi.net/jitsi-components/prod-8x8"
+    asap_accepted_issuers = { "jaas-components" }
+    asap_accepted_audiences = { "jigasi.jitsi.parthraj.cloud" }
+root@ip-10-192-12-85:/etc/prosody/conf.avail# cat j
+jaas.cfg.lua                  jitsi.parthraj.cloud.cfg.lua  
+root@ip-10-192-12-85:/etc/prosody/conf.avail# cat jitsi.parthraj.cloud.cfg.lua 
 -- We need this for prosody 13.0
 component_admins_as_room_owners = true
 
@@ -140,12 +155,12 @@ VirtualHost "auth.jitsi.parthraj.cloud"
     authentication = "internal_hashed"
     smacks_hibernation_time = 15;
 
---VirtualHost "recorder.jitsi.parthraj.cloud"
---    modules_enabled = {
---        "smacks";
---    }
---    authentication = "internal_hashed"
---    smacks_max_old_sessions = 2000;
+VirtualHost "recorder.jitsi.parthraj.cloud"
+    modules_enabled = {
+        "smacks";
+    }
+    authentication = "internal_hashed"
+    smacks_max_old_sessions = 2000;
 
 
 -- Proxy to jicofo's user JID, so that it doesn't have to register as a component.
@@ -161,9 +176,9 @@ Component "endconference.jitsi.parthraj.cloud" "end_conference"
 Component "avmoderation.jitsi.parthraj.cloud" "av_moderation_component"
     muc_component = "conference.jitsi.parthraj.cloud"
 
-Component "recorder.jitsi.parthraj.cloud" "internal_component"
-    storage = "memory"
-    muc_component = "conference.jitsi.parthraj.cloud"
+--Component "recorder.jitsi.parthraj.cloud" "internal_component"
+--    storage = "memory"
+--    muc_component = "conference.jitsi.parthraj.cloud"
 
 
 Component "lobby.jitsi.parthraj.cloud" "muc"

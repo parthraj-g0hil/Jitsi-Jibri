@@ -27,7 +27,7 @@ admins = { }
 -- This option allows you to specify additional locations where Prosody
 -- will search first for modules. For additional modules you can install, see
 -- the community module repository at https://modules.prosody.im/
---plugin_paths = {}
+plugin_paths = {"/usr/lib/prosody/modules"}
 
 -- This is the list of modules Prosody will load on startup.
 -- Documentation for bundled modules can be found at: https://prosody.im/doc/modules
@@ -63,6 +63,7 @@ modules_enabled = {
 		"time"; -- Let others know the time here on this server
 		"uptime"; -- Report how long server has been running
 		"version"; -- Replies to server version requests
+		"muc_admin";
 		--"mam"; -- Store recent messages to allow multi-device synchronization
 		--"turn_external"; -- Provide external STUN/TURN service for e.g. audio/video calls
 
